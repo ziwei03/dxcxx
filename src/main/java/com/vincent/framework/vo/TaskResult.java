@@ -23,6 +23,18 @@ public class TaskResult<T> {
         this.message = message;
     }
 
+    public TaskResultType getTaskResultType() {
+        return taskResultType;
+    }
+
+    public T getResultValue() {
+        return resultValue;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
     @Override
     public String toString() {
         return "TaskResult{" +
