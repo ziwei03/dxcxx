@@ -4,7 +4,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class UseReadWrite implements GoodsService {
+public class UseReadWriteImpl implements GoodsService {
 
     private Goods goods;
 
@@ -14,7 +14,7 @@ public class UseReadWrite implements GoodsService {
 
 
 
-    public UseReadWrite(Goods goods) {
+    public UseReadWriteImpl(Goods goods) {
         this.goods = goods;
     }
 

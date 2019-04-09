@@ -49,7 +49,7 @@ public class GoodsTest {
 
     public static void main(String[] args) throws InterruptedException {
         Goods goods = new Goods("iphone10", 10000, 100000);
-        GoodsService goodsService = new UseReadWrite(goods);
+        GoodsService goodsService = new UseReadWriteImpl(goods);
         for (int i = 0; i < 10; i++) {
             WriteThread writeThread = new WriteThread(goodsService);
             for (int j = 0; j < 100; j++) {

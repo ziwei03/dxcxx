@@ -1,10 +1,10 @@
 package com.vincent.lock.wr;
 
-public class UseSyn implements GoodsService {
+public class UseSynImpl implements GoodsService {
 
     private Goods goods;
 
-    public UseSyn(Goods goods) {
+    public UseSynImpl(Goods goods) {
         this.goods = goods;
     }
 
