@@ -1,5 +1,6 @@
 package com.vincent.framework.pool;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.vincent.framework.processor.CheckJobProcessor;
 import com.vincent.framework.processor.ITaskProcessor;
 import com.vincent.framework.vo.JobInfo;
@@ -9,11 +10,17 @@ import com.vincent.framework.vo.TaskResultType;
 import java.util.List;
 import java.util.concurrent.*;
 
+/**
+ * @author Vincent
+ * @version 1.0
+ * @date 2019/4/9 14:34
+ */
 public class PendingJobPool {
     private static final int THREAD_HOLD = Runtime.getRuntime().availableProcessors();
     private static ConcurrentHashMap<String, JobInfo> jobMap = new ConcurrentHashMap<>();
     private static BlockingQueue<Runnable> taskQueue = new ArrayBlockingQueue<>(5000);
-    private static ExecutorService taskExecutor = new ThreadPoolExecutor(THREAD_HOLD, THREAD_HOLD, 60, TimeUnit.SECONDS, taskQueue);
+    private static ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("pending-pool-%d").build();
+    private static ExecutorService taskExecutor = new ThreadPoolExecutor(THREAD_HOLD, THREAD_HOLD, 60, TimeUnit.SECONDS, taskQueue, threadFactory);
     private static CheckJobProcessor checkJobProcessor = CheckJobProcessor.getInstance();
 
     private PendingJobPool() {}

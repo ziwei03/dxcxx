@@ -13,11 +13,13 @@ public class TestMyPool {
         t.execute(new MyTask("testE"));
         System.out.println(t);
         Thread.sleep(10000);
-        t.destory();// 所有线程都执行完成才destory
+        t.destroy();// 所有线程都执行完成才destory
         System.out.println(t);
     }
 
-    // 任务类
+    /**
+     * 任务类
+     */
     static class MyTask implements Runnable {
 
         private String name;

@@ -1,4 +1,4 @@
-package com.vincent.lock.MyLock;
+package com.vincent.lock.mylock;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
@@ -11,10 +11,12 @@ public class MyLock implements Lock {
 
     static class Sync extends AbstractQueuedSynchronizer {
 
+        @Override
         protected boolean isHeldExclusively() {
             return getExclusiveOwnerThread() == Thread.currentThread();
         }
 
+        @Override
         protected boolean tryRelease(int arg) {
             if (arg == 1) {
                 setState(0);
@@ -24,6 +26,7 @@ public class MyLock implements Lock {
             return false;
         }
 
+        @Override
         protected boolean tryAcquire(int arg) {
             if (compareAndSetState(0, 1)) {
                 setExclusiveOwnerThread(Thread.currentThread());

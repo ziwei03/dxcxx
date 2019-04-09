@@ -10,8 +10,11 @@ public class AppTest {
 	
 	private final static String JOB_NAME = "计算数值";
 	private final static int JOB_LENGTH = 1000;
-	
-	//查询任务进度的线程
+	private final static int QUERY_COUNT = 350;
+
+	/**
+	 *  查询工作进度的线程
+	 */
 	private static class QueryResult implements Runnable{
 		
 		private PendingJobPool pool;
@@ -23,8 +26,9 @@ public class AppTest {
 
 		@Override
 		public void run() {
-			int i=0;//查询次数
-			while(i<350) {
+			//查询次数
+			int i=0;
+			while(i < QUERY_COUNT) {
 				List<TaskResult<String>> taskDetail = pool.getTaskResultDetails(JOB_NAME);
 				if(!taskDetail.isEmpty()) {
 					System.out.println(pool.getProgress(JOB_NAME));

@@ -1,4 +1,4 @@
-package com.vincent.lock.MyLock;
+package com.vincent.lock.mylock;
 
 import java.util.concurrent.locks.Lock;
 

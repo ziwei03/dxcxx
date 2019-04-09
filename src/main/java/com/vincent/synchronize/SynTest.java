@@ -50,7 +50,7 @@ public class SynTest {
         @Override
         public void run() {
             System.out.println(Thread.currentThread().getName() + " is running");
-            synTest.synAndStaticMethod();
+            synAndStaticMethod();
         }
     }
 

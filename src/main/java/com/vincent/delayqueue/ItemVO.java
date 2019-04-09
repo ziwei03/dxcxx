@@ -6,9 +6,9 @@ import java.util.concurrent.TimeUnit;
 public class ItemVO<T> implements Delayed {
 
     private T data;
-    private long delayTime;
+    private Long delayTime;
 
-    public ItemVO(T data, long delayTime) {
+    public ItemVO(T data, Long delayTime) {
         this.data = data;
         this.delayTime = TimeUnit.NANOSECONDS.convert(delayTime, TimeUnit.MILLISECONDS) + System.nanoTime();
     }
@@ -37,5 +37,13 @@ public class ItemVO<T> implements Delayed {
     @Override
     public int compareTo(Delayed o) {
         return (int) (this.getDelay(TimeUnit.NANOSECONDS) - o.getDelay(TimeUnit.NANOSECONDS));
+    }
+
+    @Override
+    public String toString() {
+        return "ItemVO{" +
+                "data=" + data +
+                ", delayTime=" + delayTime +
+                '}';
     }
 }

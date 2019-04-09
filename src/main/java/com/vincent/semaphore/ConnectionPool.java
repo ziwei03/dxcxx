@@ -8,7 +8,7 @@ public class ConnectionPool {
 
     private static final int POOL_SIZE = 10;
 
-    private static final LinkedList<Connection> pool = new LinkedList<>();
+    private static final LinkedList<Connection> POOL = new LinkedList<>();
 
     private Semaphore useful;
 
@@ -22,15 +22,15 @@ public class ConnectionPool {
     static {
         for (int i = 0; i < POOL_SIZE; i++) {
             Connection connection = ConnectionImpl.fechConnection();
-            pool.addLast(connection);
+            POOL.addLast(connection);
         }
     }
 
     public Connection fetchConnection() throws InterruptedException {
             useful.acquire();
             Connection connection;
-            synchronized (pool) {
-                connection = pool.removeFirst();
+            synchronized (POOL) {
+                connection = POOL.removeFirst();
             }
             useless.release();
             return connection;
@@ -40,8 +40,8 @@ public class ConnectionPool {
             if (connection != null) {
                 System.out.println("当前等待取连接的线程数：" + useful.getQueueLength() + ",可用连接数：" + useful.availablePermits());
                 useless.acquire();
-                synchronized (pool) {
-                    pool.addLast(connection);
+                synchronized (POOL) {
+                    POOL.addLast(connection);
                 }
                 useful.release();
             }

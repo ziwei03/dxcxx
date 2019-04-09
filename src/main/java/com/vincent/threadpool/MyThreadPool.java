@@ -8,7 +8,7 @@ public class MyThreadPool {
     private static final int WORK_NUM = 5;
     private static final int THREAD_NUM = 100;
 
-    private int work_num;
+    private int workNum;
 
     private final BlockingQueue<Runnable> queue;
     private WorkThread[] workThreads;
@@ -18,10 +18,10 @@ public class MyThreadPool {
     }
 
     public MyThreadPool(int workNum, int threadNum) {
-        this.work_num = workNum;
+        this.workNum = workNum;
         queue = new ArrayBlockingQueue<>(threadNum);
-        workThreads = new WorkThread[work_num];
-        for (int i = 0; i < work_num; i++) {
+        workThreads = new WorkThread[this.workNum];
+        for (int i = 0; i < this.workNum; i++) {
             workThreads[i] = new WorkThread();
             workThreads[i].start();
         }
@@ -55,18 +55,19 @@ public class MyThreadPool {
         }
     }
 
-    public void destory() {
+    public void destroy() {
         System.out.println("MyThreadPool is closing ...");
-        for (int i = 0; i < work_num; i++) {
+        for (int i = 0; i < workNum; i++) {
             workThreads[i].stopWork();
-            workThreads[i] = null; // help gc
+            //  help gc
+            workThreads[i] = null;
         }
         queue.clear();
     }
 
     @Override
     public String toString() {
-        return "WorkThread number:" + work_num
+        return "WorkThread number:" + workNum
                 + "  wait task number:" + queue.size();
     }
 }

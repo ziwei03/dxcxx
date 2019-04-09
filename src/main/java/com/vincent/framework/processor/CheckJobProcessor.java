@@ -20,13 +20,13 @@ public class CheckJobProcessor {
     }
 
     static {
-        Thread thread = new Thread(new fetchJob());
+        Thread thread = new Thread(new FetchJob());
         thread.setDaemon(true);
         thread.start();
         System.out.println("守护线程【定时清除工作缓存】开启...");
     }
 
-    private static class fetchJob implements Runnable {
+    private static class FetchJob implements Runnable {
 
         @Override
         public void run() {
